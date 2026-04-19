@@ -18,4 +18,5 @@
 | [stremio-enhanced-plugin](https://github.com/TheIntroDB/stremio-enhanced-plugin) | Skip segments for shows and movies in Stremio Enhanced using TheIntroDB |
 | [kodi-addon](https://github.com/TheIntroDB/kodi-addon) | A Kodi addon to skip intro, recap, credits, and preview segments in movies and TV shows with TheIntroDB! |
 | [emby-plugin](https://github.com/TheIntroDB/emby-plugin) | An Emby plugin to skip intros, recaps, and credits with TheIntroDB |
+| [translations](https://github.com/TheIntroDB/translations) | Details on translating TheIntroDB's website and integrations |
 | [theintrodb-assets](https://github.com/TheIntroDB/theintrodb-assets) | Assets and media resources for TheIntroDB projects |
