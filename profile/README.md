@@ -13,6 +13,7 @@
 
 | Repository | Description |
 |------------|-------------|
+| [theintrodb-npm](https://github.com/TheIntroDB/theintrodb-npm) | NPM package for easily and correctly implementing TheIntroDB into your projects! |
 | [universal-extension](https://github.com/TheIntroDB/universal-extension) | A browser extension to integrate TIDB into almost any site! |
 | [jellyfin-plugin](https://github.com/TheIntroDB/jellyfin-plugin) | A Jellyfin plugin to skip intros, recaps, and credits with TheIntroDB |
 | [stremio-enhanced-plugin](https://github.com/TheIntroDB/stremio-enhanced-plugin) | Skip segments for shows and movies in Stremio Enhanced using TheIntroDB |
