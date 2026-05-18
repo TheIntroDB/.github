@@ -9,6 +9,8 @@
 ## Skip intro, recap, credits, and preview segments within movies and TV shows!
 *Powered by community contributions to enhance your streaming experience.*
 
+https://theintrodb.org
+
 ### Repositories
 
 | Repository | Description |
