@@ -26,3 +26,9 @@ https://theintrodb.org
 | [iina-package](https://github.com/TheIntroDB/iina-package) | Skip intro, recap, credits, and preview segments with TheIntroDB in IINA for MacOS |
 | [translations](https://github.com/TheIntroDB/translations) | Details on translating TheIntroDB's website and integrations |
 | [theintrodb-assets](https://github.com/TheIntroDB/theintrodb-assets) | Assets and media resources for TheIntroDB projects |
+
+### Shared contracts
+
+| Contract | Applies to |
+|----------|------------|
+| [The two 429s](../docs/rate-limit-contract.md) | Every client that calls `api.theintrodb.org` — how long to wait, and when to stop instead of retrying |
