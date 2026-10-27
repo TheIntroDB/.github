@@ -66,6 +66,17 @@ client *does about it* is where they differ.
   next thing the user does. A tool with a queue should persist what is left and say when it will
   continue.
 
+  **Hold the two differently.** `specific_media_usage_limit_exceeded` is spent for one exact media
+  target — the same id *and* season and episode — so hold it against that target and keep asking
+  about everything else: a spent title must not stop the rest of the library. `usage_limit_exceeded`
+  is the caller's own budget and stops every request until it resets. Clients store the first keyed
+  by media target and the second as a single deadline, and check the deadline first.
+
+When the body carries no `code` at all — a proxy's `429`, say — read a wait **beyond 300 s** as a
+daily budget and anything shorter as a burst. That line is not arbitrary: it is what jellyfin-plugin,
+emby-plugin, kodi-addon and the extension all use, so an unrecognised `429` is classified the same
+way by every client.
+
 **4. A `429` is never an auth verdict.** Only `401` and `403` mean the key is bad. Never report
 "invalid key" for a `429`, and never clear a stored key because of one.
 
