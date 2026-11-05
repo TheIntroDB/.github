@@ -1,15 +1,20 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TheIntroDB/theintrodb-assets/main/logo-banner.png">
+  <a href="https://theintrodb.org"><img src="https://raw.githubusercontent.com/TheIntroDB/theintrodb-assets/main/logo-banner.png" alt="TheIntroDB" width="380"></a>
 </p>
+
 <p align="center">
-  <a href="https://discord.gg/ZbkSHAwWPg"><img src="https://invidget.switchblade.xyz/ZbkSHAwWPg"></a>
+  <a href="https://github.com/TheIntroDB"><img src="https://img.shields.io/github/stars/TheIntroDB?affiliations=OWNER&style=flat-square&logo=github&logoColor=4ade80&label=Stars&labelColor=0d0d0d&color=038939" alt="Stars"></a> <a href="https://github.com/TheIntroDB"><img src="https://img.shields.io/github/followers/TheIntroDB?style=flat-square&logo=github&logoColor=4ade80&label=Followers&labelColor=0d0d0d&color=038939" alt="Followers"></a> <a href="https://discord.com/channels/1457550295742812307/1457550298255200380"><img src="https://img.shields.io/discord/1457550295742812307?style=flat-square&logo=discord&logoColor=4ade80&label=Discord&labelColor=0d0d0d&color=038939" alt="Discord"></a>
 </p>
 
+<h3 align="center">TheIntroDB</h3>
 
-## Skip intro, recap, credits, and preview segments within movies and TV shows!
-*Powered by community contributions to enhance your streaming experience.*
+<p align="center">
+  Skip intro, recap, credits and preview segments within movies and TV shows — powered by community contributions to enhance your streaming experience.
+</p>
 
-https://theintrodb.org
+<p align="center"><a href="https://theintrodb.org">theintrodb.org</a></p>
+
+---
 
 ### Repositories
 
@@ -26,3 +31,12 @@ https://theintrodb.org
 | [iina-package](https://github.com/TheIntroDB/iina-package) | Skip intro, recap, credits, and preview segments with TheIntroDB in IINA for MacOS |
 | [translations](https://github.com/TheIntroDB/translations) | Details on translating TheIntroDB's website and integrations |
 | [theintrodb-assets](https://github.com/TheIntroDB/theintrodb-assets) | Assets and media resources for TheIntroDB projects |
+
+---
+
+<p align="center">
+  <a href="https://theintrodb.org"><img src="https://raw.githubusercontent.com/TheIntroDB/theintrodb-assets/main/badge.png" alt="TheIntroDB" width="44" height="44"></a>
+  <br><br>
+  <sub><b>TheIntroDB</b> · community-submitted intro, recap, credits and preview timestamps for your media server<br>
+  <a href="https://theintrodb.org">theintrodb.org</a> · <a href="https://github.com/TheIntroDB">GitHub</a> · <a href="https://discord.com/channels/1457550295742812307/1457550298255200380">Discord</a></sub>
+</p>
