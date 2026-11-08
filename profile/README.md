@@ -32,6 +32,12 @@
 | [translations](https://github.com/TheIntroDB/translations) | Details on translating TheIntroDB's website and integrations |
 | [theintrodb-assets](https://github.com/TheIntroDB/theintrodb-assets) | Assets and media resources for TheIntroDB projects |
 
+### Shared contracts
+
+| Contract | Applies to |
+|----------|------------|
+| [The two 429s](../docs/rate-limit-contract.md) | Every client that calls `api.theintrodb.org` — how long to wait, and when to stop instead of retrying |
+
 ---
 
 <p align="center">
@@ -40,3 +46,4 @@
   <sub><b>TheIntroDB</b> · community-submitted intro, recap, credits and preview timestamps for your media server<br>
   <a href="https://theintrodb.org">theintrodb.org</a> · <a href="https://github.com/TheIntroDB">GitHub</a> · <a href="https://discord.com/channels/1457550295742812307/1457550298255200380">Discord</a></sub>
 </p>
+
