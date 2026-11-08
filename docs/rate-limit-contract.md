@@ -1,11 +1,19 @@
 # Client contract: the two 429s from `api.theintrodb.org`
 
-An integration eventually gets a `429`. There are two different ones — a **burst** ceiling and a
+An integration eventually gets a `429`. There are two *kinds* of them — a **burst** ceiling and a
 **daily budget** — and the API shapes both identically on purpose: same JSON keys, same
 `Retry-After`, so a client only has to parse one `429`. The `code` field is the only thing that
 separates "slow down for a few seconds" from "you are out of budget until tomorrow".
 
 Clients must handle them the same way. This is that contract.
+
+The daily budget reports under **two codes, not one**, and the second is not a separate regime:
+`specific_media_usage_limit_exceeded` is the same 24-hour budget for the caller's per-title bucket,
+described in the third column of the table below. The API charges the per-title counter first
+(`middleware/usage.go`), so when the title itself is what ran out, that is the code returned —
+*instead of* `usage_limit_exceeded`. A client that branches on `usage_limit_exceeded` alone will
+miss it exactly when it matters, so both codes take the same branch. Rules 1 and 2 do not care
+which code arrived; only rule 3's policy differs.
 
 ## What arrives
 
@@ -37,16 +45,31 @@ X-UsageLimit-Reset: 50321
 | `Retry-After` | seconds left in the 10 s window (≤ 10) | seconds to UTC midnight (≤ 86400) | ≤ 86400 |
 | counters on the `429` | **none** — `Retry-After` only | `X-UsageLimit-Limit/-Remaining/-Reset` | `X-UsageLimit-SpecificMedia-Limit/-Remaining/-Reset` |
 
+The last two columns are the *same* daily budget at two scopes, not two regimes: column three is
+column two for one title. Both reset at UTC midnight and report their own `X-UsageLimit-*` trio on
+the `429`, and a client treats both as "out of budget until tomorrow" — the only difference is what
+it may keep doing meanwhile (rule 3).
+
 `Retry-After` is always present, always in RFC 9110 delta-seconds, and always the same instant as
 the matching `X-…-Reset`. **It is the one piece of the `429` a client may depend on**: the burst
-`429` carries no `X-RateLimit-*` counters at all, while the daily one does carry its own. Read the
-counters off the last `200` (they are all there) and take the wait from `Retry-After`.
+`429` carries no `X-RateLimit-*` counters at all, while the daily one does carry its own. Take the
+wait from `Retry-After` and read the counters off a `200`.
+
+Scope what you cache, because the buckets are not shared. A counter means nothing without the
+request that produced it: these limits are per endpoint *and* per identity, so only carry counters
+from the last successful response **for the same endpoint and the same caller** — a key's budget is
+not an anonymous caller's, and `/media` counters do not describe `/submit`. `X-UsageLimit-SpecificMedia-*`
+is narrower still: it describes one media target, so use it only against a response for that same
+target and keep it in its own cache keyed by target — one title's remaining budget says nothing
+about another's.
 
 ## The rules
 
 **1. The wait is `Retry-After`, whatever the code.** Fall back in this order, and stop at the first
 usable value: `Retry-After` → `retry_after_seconds` → `retry_after` (`"14.0 hours"`) →
-`X-…-Reset` → 60 s. Nothing else should be consulted to compute a wait.
+`X-…-Reset` → 60 s. That value is the **base wait**: it is a floor, not a suggestion. A client may
+lengthen it under rule 3 and must never shorten it, and nothing outside this contract should be
+consulted to compute one.
 
 **2. Clamp only as a ceiling — never down to the burst window.** `0 ≤ wait ≤ 86400`.
 
@@ -60,7 +83,10 @@ hours.
 client *does about it* is where they differ.
 
 - `rate_limit_exceeded` — sleep the wait, then retry. The run continues. Growing the wait across
-  consecutive bursts (×1, ×2, ×4, … capped) is good practice and stays inside rule 2.
+  consecutive bursts (×1, ×2, ×4, … capped) is good practice, and it is the **only** thing allowed
+  to move the rule 1 value: it multiplies that value upward, and rule 2 still caps the result. A
+  client never lengthens the wait for a daily-budget `429` — the budget is spent, and the next
+  bullet is what to do instead.
 - `usage_limit_exceeded` / `specific_media_usage_limit_exceeded` — **stop and report**. Do not sit
   in a request loop until a 24-hour window rolls over; resume on the next scheduled run, or on the
   next thing the user does. A tool with a queue should persist what is left and say when it will
@@ -110,8 +136,13 @@ admins and loopback callers are exempt from the burst ceiling.
 | emby-plugin | `TheIntroDB/Api/TheIntroDbClient.cs` | `GetRetryAfterSeconds`, `IsUsageLimitResponse`, `ClampRetryAfter`, `UsageResetClampSeconds` |
 | stremio-enhanced-plugin | `tidb.plugin.js` | `MAX_RATE_LIMIT_WAIT` |
 | universal-extension | `src/background.ts` | the `status === 429` branch |
+| theintrodb-npm | `src/funcs.ts` | `readRateLimitHeaders`, `RateLimitDetails`, and the `rateLimit` on the thrown error — parses all three counter trios, no `429` branch today |
 | mpv-script | `scripts/theintrodb.lua` | `retry_secs`, `max_retries` |
 | iina-package | `src/tidb.js` | — (no 429 branch today) |
 
-Each of those is expected to implement rules 1–6 identically; the file is listed so the next change
-to the contract can find them all.
+Each client that branches on a `429` is expected to implement rules 1–6 identically; the file is
+listed so the next change to the contract can find them all. Two rows are not there yet, and they
+are listed for the same reason: `theintrodb-npm` reads the counters off every response and hands
+them to the caller on the thrown error without ever acting on them, and `iina-package` throws on any
+non-2xx. Neither follows rules 1–3 today — which is the gap this contract exists to close, since
+rule 5 makes the counters on a `200` the thing a client paces against.
