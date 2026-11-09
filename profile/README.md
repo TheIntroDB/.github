@@ -32,6 +32,13 @@
 | [translations](https://github.com/TheIntroDB/translations) | Details on translating TheIntroDB's website and integrations |
 | [theintrodb-assets](https://github.com/TheIntroDB/theintrodb-assets) | Assets and media resources for TheIntroDB projects |
 
+## License
+
+The artwork in [`integrations/`](integrations) and the org profile content are licensed
+under **Creative Commons Attribution-ShareAlike 4.0 International** (`CC-BY-SA-4.0`) —
+see [LICENSE](LICENSE) for the full text. The icons are hotlinked by every client README,
+so they are meant to be reused; credit TheIntroDB and share alike.
+
 ---
 
 <p align="center">
