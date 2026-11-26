@@ -24,6 +24,7 @@
 | [universal-extension](https://github.com/TheIntroDB/universal-extension) | A browser extension to integrate TIDB into almost any site! |
 | [jellyfin-plugin](https://github.com/TheIntroDB/jellyfin-plugin) | A Jellyfin plugin to skip intros, recaps, and credits with TheIntroDB |
 | [stremio-enhanced-plugin](https://github.com/TheIntroDB/stremio-enhanced-plugin) | Skip segments for shows and movies in Stremio Enhanced using TheIntroDB |
+| [stremio-skip-addon](https://github.com/TheIntroDB/stremio-skip-addon) | A self-hosted Stremio addon that removes intro, recap, credits and preview segments from your streams instead of offering a button |
 | [kodi-addon](https://github.com/TheIntroDB/kodi-addon) | A Kodi addon to skip intro, recap, credits, and preview segments in movies and TV shows with TheIntroDB! |
 | [emby-plugin](https://github.com/TheIntroDB/emby-plugin) | An Emby plugin to skip intros, recaps, and credits with TheIntroDB |
 | [plex-sync](https://github.com/TheIntroDB/plex-sync) | TUI app to sync TheIntroDB skip segments to Plex |
