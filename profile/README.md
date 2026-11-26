@@ -32,14 +32,6 @@
 | [translations](https://github.com/TheIntroDB/translations) | Details on translating TheIntroDB's website and integrations |
 | [theintrodb-assets](https://github.com/TheIntroDB/theintrodb-assets) | Assets and media resources for TheIntroDB projects |
 
-<p align="center">
-  <a href="https://github.com/sponsors/TheIntroDB"><img src="https://img.shields.io/badge/Sponsor-TheIntroDB-038939?style=flat-square&logo=githubsponsors&logoColor=4ade80&labelColor=0d0d0d" alt="Sponsor TheIntroDB"></a>
-</p>
-
-<p align="center">
-  <sub>Every repository here is free and maintained in the open. Sponsoring pays for the API and the CI behind <a href="https://github.com/TheIntroDB/stremio-enhanced-plugin">stremio-enhanced-plugin</a> and the rest of them.</sub>
-</p>
-
 ---
 
 <p align="center">
